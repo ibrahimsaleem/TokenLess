@@ -1,0 +1,28 @@
+# CLAUDE.md
+
+## Project Instructions
+
+Keep this file short. Long procedures belong in `.claude/skills/<name>/SKILL.md`.
+
+### Build/Test
+- Install:
+- Test:
+- Lint:
+- Run:
+
+### Key Paths
+- Source:
+- Tests:
+- Config:
+- Generated/no-touch:
+
+### Security Constraints
+- Never print secrets.
+- Do not read `.env*`, secrets, credentials, private keys, or production dumps unless explicitly required and approved.
+- Prefer minimal diffs and focused file reads.
+
+### Token Optimization
+- Use search/grep/symbols before full-file reads.
+- Use `rtk` or short command variants for noisy commands.
+- Use code-review-graph/MCP for blast-radius review when available.
+- Use `/compact` only after writing a handoff summary.

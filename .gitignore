@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.tokenwatch/
+.tokenwatch_scripts/
+.venv/
+venv/

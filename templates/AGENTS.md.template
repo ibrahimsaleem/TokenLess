@@ -1,0 +1,24 @@
+# AGENTS.md
+
+Keep root instructions minimal because some tools treat this file as always-on.
+
+## Defaults
+- Search before reading.
+- Read snippets before full files.
+- Use graph/retrieval before scanning a repo.
+- Avoid generated files and dependency folders.
+- Prefer small targeted MCP calls.
+- Summarize decisions before task switching.
+
+## Commands
+- Test:
+- Lint:
+- Build:
+
+## Do Not Read Unless Needed
+- `node_modules/`
+- `dist/`
+- `build/`
+- `coverage/`
+- generated files
+- secrets and `.env*`
