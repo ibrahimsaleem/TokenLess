@@ -1,13 +1,24 @@
-name: "TokenWatch"
-id: "tokenwatch"
+name: "TokenLess"
+id: "tokenless"
+package_library:
+  module_file: "tokenwatch.py"
+  class_name: "TokenWatch"
+  legacy_names:
+    - "TokenWatch"
+
 version: "1.2.3"
-description: "Drop-in usage and cost tracking for any app that calls LLM APIs (OpenAI, Anthropic, Google, and more). Compare models, estimate spend, set budgets, and spot high-context paths—extend PROVIDER_PRICING for custom or gateway model ids. Zero dependencies, local-only, MIT licensed."
+description: >
+  TokenLess is an open token-optimization hub: docs, training, guidelines, system prompts,
+  and skill packs—plus the TokenWatch Python library (tokenwatch.py) for local LLM usage
+  and cost tracking across OpenAI, Anthropic, Google, and more. Compare models, set budgets,
+  estimate spend, and extend PROVIDER_PRICING for custom or gateway model ids.
+  Zero third-party dependencies for the library; data stays local under .tokenwatch/, MIT licensed.
 
 homepage: "https://github.com/ibrahimsaleem/TokenLess"
 repository: "https://github.com/ibrahimsaleem/TokenLess"
 source: "included"
 required_env_vars: []
-primary_credential: "None — works locally with no API keys required"
+primary_credential: "None — TokenWatch runs locally with no API keys required"
 
 runtime: "local"
 execution: "python"
@@ -29,14 +40,18 @@ author:
 
 category: "developer-tools"
 tags:
+  - "tokenless"
+  - "token-optimization"
   - "token-usage"
   - "cost-tracking"
   - "budget"
+  - "context-window"
   - "openai"
   - "anthropic"
   - "gemini"
   - "optimization"
   - "monitoring"
+  - "training"
   - "open-source"
 
 pricing:
@@ -45,12 +60,12 @@ pricing:
 dependencies:
   python: ">=3.9"
   packages: []
-  note: "Zero external dependencies. Pure Python standard library only."
+  note: "Zero external dependencies for tokenwatch.py. Pure Python standard library only."
 
 security:
   data_retention: "local-only"
   data_flow: "no-external-calls"
-  privacy_policy: "All data stays on your machine in .tokenwatch/ directory"
+  privacy_policy: "Usage data stays on your machine in .tokenwatch/ directory"
   terms_of_service: "MIT License"
 
 capabilities:
@@ -76,7 +91,7 @@ capabilities:
           required: false
 
     - name: "setBudget"
-      description: "Set daily, weekly, or monthly spending budget thresholds"
+      description: "Set daily, weekly, monthly, or per-call spending budget thresholds"
       parameters:
         daily_usd:
           type: "number"
@@ -107,7 +122,7 @@ capabilities:
       description: "Display a formatted spending dashboard with budget status and optimization tips"
 
     - name: "compareModels"
-      description: "Compare costs across all known models for a given token count"
+      description: "Compare costs across known models for a given token count"
       parameters:
         input_tokens:
           type: "integer"
@@ -141,7 +156,7 @@ support:
   support_email: "https://github.com/ibrahimsaleem/TokenLess/issues"
   website: "https://github.com/ibrahimsaleem/TokenLess"
   github: "https://github.com/ibrahimsaleem/TokenLess"
-  documentation: "See SKILL.md in this package"
+  documentation: "README.md, SKILL.md, docs/, training/"
   response_time: "Community supported"
 
 restrictions:
@@ -149,23 +164,24 @@ restrictions:
 
 changelog:
   "1.2.3":
-    - "✨ Initial release — TokenWatch"
-    - "✨ Pricing table for 11 models across 5 providers (Feb 2026)"
+    - "✨ TokenLess hub: documentation, training paths, guidelines, system prompts, scripts, templates"
+    - "✨ TokenWatch library (tokenwatch.py): usage tracking, budgets, model comparison, Anthropic/OpenAI hooks"
+    - "✨ Pricing table extensible via PROVIDER_PRICING"
     - "✨ Budget alerts: daily, weekly, monthly, per-call"
-    - "✨ Model comparison and cost estimation"
     - "✨ Optimization suggestions with estimated savings"
-    - "✨ Auto-hooks for Anthropic and OpenAI response objects"
-    - "✨ Local-only storage, zero dependencies, MIT licensed"
+    - "✨ Local-only storage, zero pip dependencies for the library, MIT licensed"
+    - "📦 Manifest renamed to tokenless-manifest.yaml (copy to manifest.yaml if your marketplace requires that filename)"
 
 metadata:
   status: "active"
   created_at: "2026-02-16T00:00:00Z"
-  updated_at: "2026-02-16T00:00:00Z"
+  updated_at: "2026-05-04T00:00:00Z"
   maturity: "production"
   maintenance: "community-maintained"
   required_credentials: "None"
   compatibility:
-    - "Claude Code"
-    - "OpenClaw v1.0+"
-    - "ClawhHub v2.0+"
+    - "Claude Code (skill install via SKILL.md)"
+    - "Windsurf / Cascade (skills under skills/)"
+    - "Any agent layout using Markdown skills"
+    - "Hubs that consume YAML package manifests (may expect manifest.yaml — copy tokenless-manifest.yaml)"
   security_audit: "Source code included and MIT licensed — review and modify freely"

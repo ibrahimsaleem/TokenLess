@@ -1,8 +1,25 @@
 # TokenLess
 
-**Token optimization hub** for teams building AI-powered applications: structured documentation, employee training paths, developer guidelines, system-prompt templates, Markdown skill packs for Claude Code and Windsurf, and **TokenWatch** — a zero-dependency Python library for local cost tracking and budgets.
+[![Version](https://img.shields.io/badge/version-1.2.3-blue)](https://github.com/ibrahimsaleem/TokenLess/releases)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE.md)
+[![Python](https://img.shields.io/badge/python-3.9+-blue)](https://www.python.org/downloads/)
+[![Repo](https://img.shields.io/badge/GitHub-TokenLess-181717?logo=github)](https://github.com/ibrahimsaleem/TokenLess)
 
-Repository: [github.com/ibrahimsaleem/TokenLess](https://github.com/ibrahimsaleem/TokenLess)
+**Token optimization hub** for teams building AI-powered applications: structured documentation, employee training paths, developer guidelines, system-prompt templates, Markdown skill packs (Claude Code, Windsurf, cross-agent layouts), and **TokenWatch** — a zero-dependency Python library for local cost tracking and budgets.
+
+**Repository:** [github.com/ibrahimsaleem/TokenLess](https://github.com/ibrahimsaleem/TokenLess)
+
+---
+
+## Start here
+
+| I want to… | Go to |
+|------------|--------|
+| Understand what this repo contains in one pass | [docs/00-OVERVIEW.md](docs/00-OVERVIEW.md) |
+| Follow training with schedule and levels | [training/README.md](training/README.md) |
+| Copy rules into engineering practice | [guidelines/DEVELOPER-GUIDELINES.md](guidelines/DEVELOPER-GUIDELINES.md) |
+| Drop TokenWatch into code today | [TokenWatch quick start](#tokenwatch-library--quick-start) below → [SKILL.md](SKILL.md) |
+| Install agent skills into another project | [skills/README.md](skills/README.md) and `bash scripts/install-skills.sh` |
 
 ---
 
@@ -10,61 +27,130 @@ Repository: [github.com/ibrahimsaleem/TokenLess](https://github.com/ibrahimsalee
 
 | Audience | What you get |
 |----------|-------------|
-| **Software engineers** building LLM features | Training path (Levels 1–3), guidelines with PR checklists, system-prompt templates, TokenWatch integration |
-| **Tech leads and staff engineers** | Architecture patterns (Level 3), enterprise rollout plan, case studies with benchmarks, skill pack deployment |
-| **New hires on AI teams** | Structured first-week path below, beginner training, cheat sheet, templates to bootstrap a project |
-| **Security and compliance reviewers** | DEVELOPER-GUIDELINES Rule 6 (secrets/PII), MCP policy checklist, `.contextignore` template, system-prompt audit |
-| **Product managers** | Cost per user-day framing, case study ROI numbers, pilot design guidance in `docs/07-case-studies.md` |
+| **Software engineers** building LLM features | Training (Levels 1–3), guidelines with PR checklists, system-prompt templates, TokenWatch integration |
+| **Tech leads and staff engineers** | Architecture patterns (Level 3), enterprise rollout in skill packs, case studies, skill deployment |
+| **New hires on AI teams** | First-week path below, beginner training, cheat sheet, [templates/](templates/) |
+| **Security / compliance reviewers** | DEVELOPER-GUIDELINES (secrets/PII), [docs/04-mcp-guide.md](docs/04-mcp-guide.md), [.contextignore.template](templates/.contextignore.template) |
+| **Product managers** | Cost framing and pilot design in [docs/07-case-studies.md](docs/07-case-studies.md) |
+
+---
+
+## Repository structure
+
+Everything below lives at the root of this repo unless noted.
+
+```
+TokenLess/
+├── README.md                 ← You are here — navigation hub
+├── LICENSE.md                ← MIT license
+├── tokenless-manifest.yaml   ← Pack metadata (skills / hubs — copy to manifest.yaml if required)
+├── SKILL.md                  ← TokenWatch as an installable skill + full integration notes
+├── tokenwatch.py             ← Core library (no pip deps — standard library only)
+│
+├── docs/                     ← Reference documentation (read in order for onboarding)
+│   ├── 00-OVERVIEW.md
+│   ├── 01-core-concepts.md
+│   ├── 02-optimization-techniques.md
+│   ├── 03-tool-guides/
+│   │   ├── api-usage.md      ← HTTP APIs, caching, headers
+│   │   ├── claude-code.md
+│   │   ├── copilot.md
+│   │   ├── ide-extensions.md ← VS Code–family extensions (Cline, Continue, etc.)
+│   │   └── windsurf.md
+│   ├── 04-mcp-guide.md
+│   ├── 05-tools-and-platforms.md
+│   ├── 06-competency-framework.md
+│   ├── 07-case-studies.md
+│   └── 08-resources.md
+│
+├── training/                 ← Curricula by skill level
+│   ├── README.md             ← Suggested weeks + links to levels
+│   ├── level-1-beginner/
+│   ├── level-2-intermediate/
+│   └── level-3-expert/
+│
+├── guidelines/               ← Rules and decision aids
+│   ├── DEVELOPER-GUIDELINES.md
+│   ├── SYSTEM-PROMPT-GUIDE.md
+│   ├── MODEL-SELECTION-GUIDE.md
+│   ├── CONTEXT-WINDOW-GUIDE.md
+│   └── QUICK-REFERENCE-CHEATSHEET.md
+│
+├── system-prompts/           ← Annotated prompt templates + README
+├── skills/                   ← 15 skills in two packs — see skills/README.md
+│   ├── token_optimization_skill_pack/
+│   └── enterprise_token_saver_skills_v2/
+│
+├── scripts/                  ← CLI wrappers + installers — see scripts/README.md
+├── templates/                ← Lean CLAUDE.md, AGENTS.md, ignore starters
+│
+├── deep-research-report (4).md   ← Original merged research (traceability)
+└── context.txt                   ← Source conversation log for skill packs / research (optional read)
+```
+
+**Root files worth knowing**
+
+| File | Purpose |
+|------|---------|
+| `tokenwatch.py` | Import `TokenWatch` in your app or run helpers from `scripts/` |
+| `SKILL.md` | Agent-facing skill doc + generic `after_llm_call` pattern for any provider |
+| `tokenless-manifest.yaml` | Package metadata for hubs and catalogs; copy to `manifest.yaml` if the target requires that exact filename |
+| `deep-research-report (4).md` | Single-file archive of research split across `docs/` |
+| `context.txt` | Historical provenance for generated assets — not required reading |
+
+---
+
+## Documentation reading order
+
+Use this sequence for **new hires** or anyone onboarding to token optimization in one sitting:
+
+| Step | Doc | Topic |
+|------|-----|--------|
+| 1 | [docs/00-OVERVIEW.md](docs/00-OVERVIEW.md) | Hub map, roles, rollout pointers |
+| 2 | [docs/01-core-concepts.md](docs/01-core-concepts.md) | Tokens, windows, billing |
+| 3 | [docs/02-optimization-techniques.md](docs/02-optimization-techniques.md) | Compression, RAG, routing, sessions |
+| 4 | [docs/03-tool-guides/](docs/03-tool-guides/) | Your IDE / API surface |
+| 5 | [docs/04-mcp-guide.md](docs/04-mcp-guide.md) | MCP overhead and policy |
+| 6 | [docs/05-tools-and-platforms.md](docs/05-tools-and-platforms.md) | Monitoring, OSS helpers |
+| 7 | [docs/06-competency-framework.md](docs/06-competency-framework.md) | Skill levels for teams |
+| 8 | [docs/07-case-studies.md](docs/07-case-studies.md) | Pilots and reported outcomes |
+| 9 | [docs/08-resources.md](docs/08-resources.md) | External links and references |
+
+For **hands-on learning**, pair the docs above with **[training/README.md](training/README.md)** (Week 1 → Level 1, Weeks 2–3 → Level 2 + pilot, Week 4+ → Level 3 / OSS pilots).
 
 ---
 
 ## Requirements
 
-- **Python 3.9+** for `tokenwatch.py` and all `scripts/`. No third-party packages required — standard library only.
-- **Git Bash, WSL, or macOS/Linux shell** for `scripts/install-skills.sh`.
-- **Claude Code, Windsurf, or any MCP-compatible agent** to use the published skill packs.
+- **Python 3.9+** for `tokenwatch.py` and `scripts/`. No third-party packages required for the library — standard library only.
+- **Git Bash, WSL, or macOS/Linux shell** for `scripts/install-skills.sh` and `scripts/audit-claude-md.sh`.
+- **Claude Code, Windsurf, or another MCP-compatible agent** if you use the skill packs as shipped.
 
 ---
 
 ## Suggested first week (new hire onboarding)
 
-If you are new to the team and to token optimization, follow this path:
+**Day 1 (~60 min):** [docs/00-OVERVIEW.md](docs/00-OVERVIEW.md) → [docs/01-core-concepts.md](docs/01-core-concepts.md) → [training/level-1-beginner/01-what-are-tokens.md](training/level-1-beginner/01-what-are-tokens.md) (exercise).
 
-**Day 1 (60 minutes):**
-1. Read [docs/00-OVERVIEW.md](docs/00-OVERVIEW.md) — understand the full picture and navigation.
-2. Read [docs/01-core-concepts.md](docs/01-core-concepts.md) — tokens, context windows, billing basics.
-3. Open [training/level-1-beginner/01-what-are-tokens.md](training/level-1-beginner/01-what-are-tokens.md) and complete the 2-minute exercise.
+**Day 2 (~90 min):** Finish Level 1 (`02`–`04`), apply five quick optimizations from [training/level-1-beginner/04-first-optimizations.md](training/level-1-beginner/04-first-optimizations.md), run `bash scripts/install-skills.sh .`.
 
-**Day 2 (90 minutes):**
-4. Complete the remaining Level 1 lessons (`02`, `03`, `04`).
-5. Apply the five first-optimizations to one prompt in your current project.
-6. Install the skill packs into your project: `bash scripts/install-skills.sh .`
+**Day 3–5 (~2–3 hr):** [training/level-2-intermediate/](training/level-2-intermediate/), integrate TokenWatch into one path, run `python scripts/compare_models.py --in 2000 --out 500`, read [guidelines/DEVELOPER-GUIDELINES.md](guidelines/DEVELOPER-GUIDELINES.md).
 
-**Day 3–5 (2–3 hours):**
-7. Work through [training/level-2-intermediate/](training/level-2-intermediate/) at your own pace.
-8. Integrate TokenWatch into one script or route — run `python scripts/compare_models.py --in 2000 --out 500`.
-9. Read [guidelines/DEVELOPER-GUIDELINES.md](guidelines/DEVELOPER-GUIDELINES.md) and check your project against the PR checklist items.
-
-**By end of week:**
-10. Identify your highest-spend task type and open a ticket to address it.
-11. Schedule a 30-minute team token review using the agenda in `training/level-3-expert/05-monitoring-at-scale.md`.
+**End of week:** Pick a cost driver to fix; schedule a token review using [training/level-3-expert/05-monitoring-at-scale.md](training/level-3-expert/05-monitoring-at-scale.md).
 
 ---
 
-## Navigate the repo
+## Quick reference: folders at a glance
 
-| Area | What you get |
-|------|----------------|
-| [docs/](docs/) | Nine structured guides: concepts, techniques, tool guides, MCP, monitoring, competency, case studies, resources |
-| [training/](training/) | Three learning levels with objectives, exercises, misconceptions, and "you know this when…" rubrics |
-| [guidelines/](guidelines/) | Non-negotiable dev rules with PR checklists, model selection decision tree, context-window reference, one-page cheat sheet |
-| [system-prompts/](system-prompts/) | Five annotated starter prompts for common app types, each with design notes on token tradeoffs |
-| [skills/](skills/) | **15** published skills across two packs (v1 and v2 enterprise) for Claude Code, Windsurf, and cross-agent layouts |
-| [templates/](templates/) | Lean `CLAUDE.md`, `AGENTS.md`, and ignore-file starters — use these for every new AI project |
-| [scripts/](scripts/) | CLI helpers for TokenWatch, context size estimation, model comparison, and one-command skill installation |
-| [tokenwatch.py](tokenwatch.py) | The core library — zero-dependency, local-only, MIT licensed |
-
-Full merged research source: [deep-research-report (4).md](deep-research-report%20(4).md)
+| Folder | Contents |
+|--------|----------|
+| [docs/](docs/) | Concepts through resources + IDE/API tool guides |
+| [training/](training/) | Lessons L1–L3 with exercises and rubrics — **schedule:** [training/README.md](training/README.md) |
+| [guidelines/](guidelines/) | Engineering rules, prompts, models, context, cheat sheet |
+| [system-prompts/](system-prompts/) | Five templates + design notes — **index:** [system-prompts/README.md](system-prompts/README.md) |
+| [skills/](skills/) | Two packs, 15 skills — **index:** [skills/README.md](skills/README.md) |
+| [scripts/](scripts/) | Cost/compare/context helpers — **index:** [scripts/README.md](scripts/README.md) |
+| [templates/](templates/) | Starter `CLAUDE.md`, `AGENTS.md`, ignore files |
 
 ---
 
@@ -84,65 +170,62 @@ monitor.record_usage(
 print(monitor.format_dashboard())
 ```
 
-**Provider helpers** (no manual token extraction required):
+**Provider helpers** (token counts taken from the response object):
 
 ```python
-# Anthropic
 monitor.record_from_anthropic_response(response, task_label="summarize")
-
-# OpenAI
 monitor.record_from_openai_response(response, task_label="classify")
 ```
 
-See [SKILL.md](SKILL.md) for the full API, generic provider pattern, and provider pricing reference.
+Full API, pricing table notes, and generic usage extraction: **[SKILL.md](SKILL.md)**.
 
 ---
 
 ## Scripts (CLI)
 
-From repo root, with Python 3.9+:
+From repo root with Python 3.9+:
 
 ```bash
-# Compare cost of a typical request across all models in the pricing table
 python scripts/compare_models.py --in 2000 --out 500 --top 10
-
-# Estimate monthly cost at a given volume
 python scripts/estimate-cost.py claude-sonnet-4-5-20250929 --in 5000 --out 1000
-
-# Rough token estimate for any file (no API call)
 python scripts/check-context-size.py path/to/prompt.txt
-
-# Audit agent config files for bloat (Git Bash / WSL / macOS/Linux)
 bash scripts/audit-claude-md.sh
-
-# Install both skill packs into another project
 bash scripts/install-skills.sh /path/to/your/app
 ```
+
+Details: [scripts/README.md](scripts/README.md).
 
 ---
 
 ## Published skills (15 total)
 
-| Pack | Folder | Skills |
-|------|--------|--------|
-| v1 | [skills/token_optimization_skill_pack/](skills/token_optimization_skill_pack/) | 7 — context budget, RAG-first navigation, MCP minimizer, compact handoff, small-model router, minimal output contract, project memory curator |
-| v2 Enterprise | [skills/enterprise_token_saver_skills_v2/](skills/enterprise_token_saver_skills_v2/) | 8 — token-optimizer audit, RTK compression, code-review-graph context, MCP token saver, memory slimmer, prompt-cache safe optimization, token-frugal code review, context-ignore curator |
+| Pack | Location |
+|------|----------|
+| v1 — Token optimization | [skills/token_optimization_skill_pack/](skills/token_optimization_skill_pack/) |
+| v2 — Enterprise token saver | [skills/enterprise_token_saver_skills_v2/](skills/enterprise_token_saver_skills_v2/) |
 
-Full index, manual install snippets, and reading order: [skills/README.md](skills/README.md)
+Indexed list and install paths: **[skills/README.md](skills/README.md)**.
 
 ---
 
 ## Companion open-source repositories
 
-Use alongside TokenWatch to **remove** structural token waste, not just measure it:
+| Repo | Role |
+|------|------|
+| [alexgreensh/token-optimizer](https://github.com/alexgreensh/token-optimizer) | Structural audit: memory, skills, MCP bloat |
+| [rtk-ai/rtk](https://github.com/rtk-ai/rtk) | Compress noisy terminal output |
+| [tirth8205/code-review-graph](https://github.com/tirth8205/code-review-graph) | Graph-guided code context |
 
-| Repo | What it removes |
-|------|-----------------|
-| [alexgreensh/token-optimizer](https://github.com/alexgreensh/token-optimizer) | Bloated project memory, skills, MCP overhead, compaction health |
-| [rtk-ai/rtk](https://github.com/rtk-ai/rtk) | Noisy terminal output before it enters agent context |
-| [tirth8205/code-review-graph](https://github.com/tirth8205/code-review-graph) | Wide repo scans replaced by graph-guided precise context reads |
+Pilot ideas: [docs/07-case-studies.md](docs/07-case-studies.md).
 
-Pilot guidance: [docs/07-case-studies.md](docs/07-case-studies.md)
+---
+
+## Contributing and customizing
+
+This repo is maintained as an **internal handbook + library** you can fork or vendor. When you change prompts or agent config:
+
+- Follow [guidelines/SYSTEM-PROMPT-GUIDE.md](guidelines/SYSTEM-PROMPT-GUIDE.md) (versioning + regression checks).
+- Prefer starting new projects from [templates/](templates/).
 
 ---
 
