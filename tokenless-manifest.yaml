@@ -6,7 +6,7 @@ package_library:
   legacy_names:
     - "TokenWatch"
 
-version: "1.2.3"
+version: "1.3.0"
 description: >
   TokenLess is an open token-optimization hub: docs, training, guidelines, system prompts,
   and skill packs—plus the TokenWatch Python library (tokenwatch.py) for local LLM usage
@@ -163,6 +163,14 @@ restrictions:
   - "None — MIT Licensed"
 
 changelog:
+  "1.3.0":
+    - "✨ litellm-harness: full LiteLLM gateway demo with prompt injection proxy, guardrails, token compression, and Rich chat UI"
+    - "✨ GuardrailsChecker: prompt injection detection, PII scanner, content policy, input size guard"
+    - "✨ PromptCompressor: heuristic pipeline (filler removal, word subs, extractive scoring) + optional LLMLingua neural compression"
+    - "✨ TokenTracker: per-model accurate token counting and cost via litellm.token_counter() + litellm.completion_cost()"
+    - "✨ LiteLLMGateway: response caching, custom callbacks, multi-provider routing with one env var"
+    - "✨ proxy_config.yaml: enterprise LiteLLM proxy server with model routing, fallbacks, and budget enforcement"
+    - "✨ TokenWatch integration: persistent session budgets wired into gateway"
   "1.2.3":
     - "✨ TokenLess hub: documentation, training paths, guidelines, system prompts, scripts, templates"
     - "✨ TokenWatch library (tokenwatch.py): usage tracking, budgets, model comparison, Anthropic/OpenAI hooks"

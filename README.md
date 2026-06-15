@@ -16,6 +16,7 @@
 | I want to… | Go to |
 |------------|--------|
 | Understand what this repo contains in one pass | [docs/00-OVERVIEW.md](docs/00-OVERVIEW.md) |
+| **Run the LiteLLM gateway demo** | [litellm-harness/README.md](litellm-harness/README.md) |
 | Follow training with schedule and levels | [training/README.md](training/README.md) |
 | Copy rules into engineering practice | [guidelines/DEVELOPER-GUIDELINES.md](guidelines/DEVELOPER-GUIDELINES.md) |
 | Drop TokenWatch into code today | [TokenWatch quick start](#tokenwatch-library--quick-start) below → [SKILL.md](SKILL.md) |
@@ -46,6 +47,16 @@ TokenLess/
 ├── tokenless-manifest.yaml   ← Pack metadata (skills / hubs — copy to manifest.yaml if required)
 ├── SKILL.md                  ← TokenWatch as an installable skill + full integration notes
 ├── tokenwatch.py             ← Core library (no pip deps — standard library only)
+│
+├── litellm-harness/          ← LiteLLM gateway demo (NEW)
+│   ├── app.py                ← Rich terminal chat UI entry point
+│   ├── gateway.py            ← LiteLLM orchestration (guardrails → compress → LLM → track)
+│   ├── guardrails.py         ← Prompt injection, PII, content policy, size guard
+│   ├── compressor.py         ← Heuristic + optional LLMLingua prompt compression
+│   ├── token_tracker.py      ← Token counting + cost via LiteLLM + TokenWatch integration
+│   ├── proxy_config.yaml     ← LiteLLM proxy server (enterprise gateway mode)
+│   ├── requirements.txt      ← litellm, rich, python-dotenv
+│   └── README.md             ← Setup and feature docs
 │
 ├── docs/                     ← Reference documentation (read in order for onboarding)
 │   ├── 00-OVERVIEW.md

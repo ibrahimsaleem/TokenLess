@@ -1,0 +1,18 @@
+# TokenLess LiteLLM Gateway — dependencies
+# Install: pip install -r requirements.txt
+
+# Core gateway
+litellm>=1.40.0           # unified LLM API, token counting, cost tracking, caching
+
+# Terminal UI
+rich>=13.7.0              # panels, tables, markup
+
+# Environment variables
+python-dotenv>=1.0.0      # loads .env file
+
+# Optional: neural prompt compression (adds ~500MB model download on first use)
+# Uncomment to enable LLMLingua support (--llmlingua flag):
+# llmlingua>=0.2.0
+
+# Optional: for accurate tiktoken-based counting when litellm fallback is needed
+# tiktoken>=0.6.0
